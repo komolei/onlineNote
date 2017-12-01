@@ -1,0 +1,31 @@
+body{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+}
+@keyframes an {
+    0%{
+        opacity:.4;
+    }
+    50%{
+        opacity:1;
+    }
+    100%{
+        opacity:0;
+    }
+}
+.toast{
+    position: fixed;
+    padding: 5px;
+    left:50%;
+    top: 100%;
+    transform: translate(-50%,-100%);
+    border: 1px solid #ccc;
+    box-shadow: 5px 5px 8px 2px #ccc;
+    border-radius: 5px;
+    line-height: 34px;
+    text-align: center;
+    animation: 1s an ease-in ;
+}
+.toast:hover{
+    animation-play-state: paused;
+}

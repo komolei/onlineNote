@@ -1,0 +1,50 @@
+{
+  "name": "onlinenote",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "compile": "webpack --config src/base.config.js",
+    "watch": "webpack --watch --config src/base.config.js",
+    "dev": "webpack-dev-server --config src/base.config.js ",
+    "test": "webpack --config src/product.config.js --profile --json > stats.json",
+    "compress": "webpack --config src/product.config.js -p --progress"
+  },
+  "dependencies": {
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "css-loader": "^0.28.7",
+    "debug": "~2.6.9",
+    "ejs": "^2.5.7",
+    "express": "~4.15.5",
+    "express-session": "^1.15.6",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "jade": "~1.11.0",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "morgan": "~1.9.0",
+    "passport": "^0.4.0",
+    "passport-github": "^1.1.0",
+    "postcss-load": "^0.1.6",
+    "sequelize": "^4.23.2",
+    "serve-favicon": "~2.4.5",
+    "sqlite3": "^3.1.13",
+    "style-loader": "^0.19.0",
+    "webpack-dev-server": "^2.9.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.6",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.12.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.30.1",
+    "uglifyjs-webpack-plugin": "^1.1.2",
+    "webpack": "^3.8.1",
+    "webpack-bundle-analyzer": "^2.9.1"
+  }
+}

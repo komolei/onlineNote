@@ -1,0 +1,73 @@
+.waterfall .ct {
+  position: relative;
+  overflow: hidden;
+  &:before{
+    content:'';
+    display: block;
+    clear: both;
+  }
+}
+
+.note {
+  position: absolute;
+  /*我去，这坑，原来还要绝对定位*/
+  //width: 200px;
+  //height: 300px;
+  margin: 13px 10px;
+  border: 1px solid black;
+  float: left;
+  transition: all 1s;
+  .noteHeader{
+  text-align: right;
+  font-size:20px;
+  color:red;
+    background: transparent;
+      &>p{
+        width: 50px;
+        height: 15px;
+        text-align: center;
+        background: #000;
+        margin:0 auto;
+        margin-top: -20px;
+      }
+  .noteDel{
+    cursor: pointer;
+  }
+}
+  .noteCt{
+    word-break: break-all;
+  }
+  footer{
+    text-align: center;
+    input{
+      width:100%;
+      outline:none;
+      border:none;
+    }
+  }
+}
+
+span {
+  //width: 200px;
+  //height: 300px;
+}
+
+.h1 {
+  height: 400px;
+}
+
+.h2 {
+  height: 100px;
+}
+
+.h3 {
+  height: 200px;
+}
+
+.h4 {
+  height: 500px;
+}
+
+.h5 {
+  height: 150px;
+}

@@ -1,0 +1,232 @@
+body,
+p {
+  margin: 0;
+}
+header {
+  background: #ccc;
+}
+header:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+header a {
+  color: #111;
+  text-decoration: none;
+}
+header a：hover {
+  color: cornsilk;
+}
+.addNote {
+  padding-left: 10px;
+  cursor: pointer;
+  font-size: 30px;
+  float: left ;
+}
+.login,
+.login1 {
+  float: right;
+  padding-right: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 30px;
+}
+.login img,
+.login1 img {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+          border-radius: 50%;
+  vertical-align: bottom;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+}
+@-webkit-keyframes an {
+  0% {
+    opacity: .4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-moz-keyframes an {
+  0% {
+    opacity: .4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-o-keyframes an {
+  0% {
+    opacity: .4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes an {
+  0% {
+    opacity: .4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.toast {
+  position: fixed;
+  padding: 5px;
+  left: 50%;
+  top: 100%;
+  -webkit-transform: translate(-50%, -100%);
+     -moz-transform: translate(-50%, -100%);
+      -ms-transform: translate(-50%, -100%);
+       -o-transform: translate(-50%, -100%);
+          transform: translate(-50%, -100%);
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 5px 5px 8px 2px #ccc;
+     -moz-box-shadow: 5px 5px 8px 2px #ccc;
+          box-shadow: 5px 5px 8px 2px #ccc;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  line-height: 34px;
+  text-align: center;
+  -webkit-animation: 1s an ease-in;
+     -moz-animation: 1s an ease-in;
+       -o-animation: 1s an ease-in;
+          animation: 1s an ease-in;
+}
+.toast:hover {
+  -webkit-animation-play-state: paused;
+     -moz-animation-play-state: paused;
+       -o-animation-play-state: paused;
+          animation-play-state: paused;
+}
+@-webkit-keyframes noteAn {
+  0% {
+    opacity: .4;
+  }
+  15% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes noteAn {
+  0% {
+    opacity: .4;
+  }
+  15% {
+    opacity: 1;
+  }
+}
+@-o-keyframes noteAn {
+  0% {
+    opacity: .4;
+  }
+  15% {
+    opacity: 1;
+  }
+}
+@keyframes noteAn {
+  0% {
+    opacity: .4;
+  }
+  15% {
+    opacity: 1;
+  }
+}
+.note {
+  width: 200px;
+  text-align: center;
+  -webkit-box-shadow: 2px 2px 8px 2px #ccc;
+     -moz-box-shadow: 2px 2px 8px 2px #ccc;
+          box-shadow: 2px 2px 8px 2px #ccc;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-animation: 2s noteAn ease-in;
+     -moz-animation: 2s noteAn ease-in;
+       -o-animation: 2s noteAn ease-in;
+          animation: 2s noteAn ease-in;
+  padding: 5px;
+  line-height: 34px;
+}
+.waterfall .ct {
+  position: relative;
+  overflow: hidden;
+}
+.waterfall .ct:before {
+  content: '';
+  display: block;
+  clear: both;
+}
+.note {
+  position: absolute;
+  /*我去，这坑，原来还要绝对定位*/
+  margin: 13px 10px;
+  border: 1px solid black;
+  float: left;
+  -webkit-transition: all 1s;
+  -o-transition: all 1s;
+  -moz-transition: all 1s;
+  transition: all 1s;
+}
+.note .noteHeader {
+  text-align: right;
+  font-size: 20px;
+  color: red;
+  background: transparent;
+}
+.note .noteHeader > p {
+  width: 50px;
+  height: 15px;
+  text-align: center;
+  background: #000;
+  margin: 0 auto;
+  margin-top: -20px;
+}
+.note .noteHeader .noteDel {
+  cursor: pointer;
+}
+.note .noteCt {
+  word-break: break-all;
+}
+.note footer {
+  text-align: center;
+}
+.note footer input {
+  width: 100%;
+  outline: none;
+  border: none;
+}
+.h1 {
+  height: 400px;
+}
+.h2 {
+  height: 100px;
+}
+.h3 {
+  height: 200px;
+}
+.h4 {
+  height: 500px;
+}
+.h5 {
+  height: 150px;
+}
