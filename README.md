@@ -16,3 +16,5 @@ npm run watch // webpack watch
 npm run test // generate stats.json and open http://webpack.github.io/analyse/ to analyze
 npm run compress // generate min-zise resource and watch the allocation of resource
 ```
+### License
+MIT licensed
