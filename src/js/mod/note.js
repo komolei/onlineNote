@@ -136,8 +136,10 @@ class Note {
     const note = this.init();
     const spanCt = document.querySelectorAll('.noteCt>span')[this.id - 1];
     const inputValue = document.querySelectorAll('input')[this.id - 1];
+    // spanCt.style.display = 'hidden';
+    inputValue.value = spanCt.innerText;
     inputValue.addEventListener('change', () => {
-      spanCt.innerText += inputValue.value;
+      spanCt.innerText = inputValue.value;
       const data = JSON.stringify({
         note: spanCt.innerText,
         id: note.id,
