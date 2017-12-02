@@ -1,5 +1,7 @@
 ### onLine notes
 record your notes
+### demonstration
+![show](https://github.com/komolei/onlineNote/blob/master/online_note.gif)
 ### main functionalities
 - signUp、logIn and logOut // GitHub OAuth
 - CRUD operations
