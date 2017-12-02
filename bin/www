@@ -8,6 +8,7 @@ const app = require('../app');
 const debug = require('debug')('onlinenote:server');
 const http = require('http');
 
+
 /**
  * Get port from environment and store in Express.
  */
@@ -20,6 +21,48 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
+
+/*
+* Set SocketIo functionality
+*/
+const io = require('socket.io')(server);
+const request = require('request');
+
+function robert(content, socket) {
+  const options = {
+    url: 'http://www.tuling123.com/openapi/api',
+    method: 'POST',
+    json: true,
+    body: {
+      key: '9af90ef2169e43daac8b4f0f76a173e8',
+      info: content,
+      userid: 123,
+    },
+  };
+  request(options, (error, response, body) => {
+    if (error) {
+      return console.error('upload failed:', error);
+    }
+    console.log(body.text);
+    // socket.broadcast.emit('chat', `${body.text}`) //广播，其他人都能听得见
+    io.sockets.emit('chat', `${body.text}`);
+  });
+}
+io.on('connection', (socket) => {
+  socket.on('chat', (content) => {
+    if (/^robot/g.test(content)) {
+      const content1 = content.substr(5, content.length);
+      robert(content1, socket);
+    } else {
+      // socket.broadcast.emit('chat', `${user} say: ${content}`) //广播，其他人都能听得见
+      io.sockets.emit('chat', `${content}`); // all peopel can hear
+    }
+    // robert(content, user, socket);
+  });
+});
+
+// add turing robert
+
 
 /**
  * Listen on provided port, on all network interfaces.

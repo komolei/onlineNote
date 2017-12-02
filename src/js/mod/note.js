@@ -19,8 +19,18 @@ class Note {
   }
 
   init() {
+    if (Number.isNaN(this.options.id)) {
+      console.log('this.options.id:first:', this.options.id);
+      return {
+        id: this.id,
+        container: this.options.containers,
+        inputVale: this.options.content,
+      };
+    }
+
+    console.log('this.options.id:second:', this.options.id);
     return {
-      id: this.id,
+      id: this.options.id,
       container: this.options.containers,
       inputVale: this.options.content,
     };
@@ -28,10 +38,11 @@ class Note {
   creatNote() {
     const note = this.init();
     // const fragment  = document.createDocumentFragment();
+    console.log('note params:', note, '\n');
     const noteTemplate = `
                 <header class="noteHeader">
                     <p class="pos"></p>
-                    <span class="noteDel" id="${this.id}">X</span>
+                    <span class="noteDel" id="${note.id}">X</span>
                 </header>
                 <div class="noteCt">
                 <span>
@@ -44,14 +55,18 @@ class Note {
         `;
     const div = document.createElement('div');
     div.classList.add('note');
-    div.id = this.id;
+    // div.id = this.id;
+    div.id = note.id;
     div.innerHTML = noteTemplate;
     document.querySelector('.waterfall.ct').appendChild(div);
     new Toast('please input text');
     waterFall();
   }
   bindEvent() {
-    const noteId = document.getElementById(this.id);
+    const note = this.init();
+    // console.log('bindef', note.id);
+    // console.log('bindEvent', this.id);
+    const noteId = document.getElementById(note.id);
     Event.on('delete', (val) => {
       console.log('val:', val);
       if (val === noteId.id) {
@@ -71,54 +86,63 @@ class Note {
     return { x, y };
   }
   moveEvent() {
-    const noteCt1 = document.getElementById(this.id);
+    const note = this.init();
+    const noteCt1 = document.getElementById(note.id);
     const noteCt = document.getElementsByClassName('pos')[this.id - 1];
-    console.log('noteCt', noteCt);
+    console.log('noteCt', noteCt1, noteCt, '\n');
     noteCt.onmousedown = () => {
+      // noteCt1.style.transition = 'none';
+      noteCt1.classList.remove('noteT');
       noteCt.style.cursor = 'move';
       const result = this.getMousePos(event);
       console.log('onmousedown', result, this);
-    };
-    noteCt.onmousemove = () => {
-      const result = this.getMousePos(event);
-      const oW = parseInt(noteCt.offsetWidth / 2);
-      const oH = parseInt(noteCt.offsetHeight / 2);
-      const oW1 = parseInt(noteCt1.offsetWidth / 2);
-      const oH1 = parseInt(noteCt1.offsetHeight / 2);
-      const oL = noteCt.offsetLeft;
-      const oT = noteCt.offsetTop;
-      console.log('ow,oh', oW, oH, 'oL', 'oT', oL, oT);
-      console.log('result is ', result);
-      noteCt1.style.left = `${result.x - oW1}px`;
-      noteCt1.style.top = `${result.y}px`;
-      console.log(noteCt.style.left, noteCt.style.top);
+      noteCt.onmousemove = () => {
+        const result = this.getMousePos(event);
+        // const oW = parseInt(noteCt.offsetWidth);
+        // const oH = parseInt(noteCt.offsetHeight);
+        const oW1 = parseInt(noteCt1.offsetWidth);
+        // const oH1 = parseInt(noteCt1.offsetHeight);
+        // const oL = noteCt.offsetLeft;
+        // const oT = noteCt.offsetTop;
+        // console.log('ow,oh', oW, oH, 'oL', 'oT', oL, oT);
+        // console.log('result is ', result);
+        noteCt1.style.left = `${result.x - oW1 + 100}px`;
+        noteCt1.style.top = `${result.y}px`;
+        // console.log(noteCt.style.left, noteCt.style.top);
+      };
     };
 
+
     noteCt.onmouseup = () => {
+      const noteCt1 = document.getElementById(note.id);
       const result = this.getMousePos(event);
-      const oW = parseInt(noteCt.offsetWidth / 2);
-      const oH = parseInt(noteCt.offsetHeight / 2);
-      const oW1 = parseInt(noteCt1.offsetWidth / 2);
-      const oH1 = parseInt(noteCt1.offsetHeight / 2);
-      const oL = noteCt.offsetLeft;
-      const oT = noteCt.offsetTop;
-      console.log('ow,oh', oW, oH, 'oL', 'oT', oL, oT);
-      console.log('result is ', result);
-      noteCt1.style.left = `${result.x - oW1}px`;
+      // const oW = parseInt(noteCt.offsetWidth);
+      // const oH = parseInt(noteCt.offsetHeight);
+      const oW1 = parseInt(noteCt1.offsetWidth);
+      // const oH1 = parseInt(noteCt1.offsetHeight);
+      // const oL = noteCt.offsetLeft;
+      // const oT = noteCt.offsetTop;
+      // console.log('ow,oh', oW, oH, 'oL', 'oT', oL, oT);
+      // console.log('result is ', result);
+      // noteCt1.style.left = `${result.x - oW1}px`;
+      // noteCt1.style.top = `${result.y}px`;
+      noteCt1.style.left = `${result.x - oW1 + 100}px`;
       noteCt1.style.top = `${result.y}px`;
-      console.log(noteCt.style.left, noteCt.style.top);
+      // console.log(noteCt.style.left, noteCt.style.top);
     };
   }
   edit() {
     console.log('this.id', this.id);
+    const note = this.init();
     const spanCt = document.querySelectorAll('.noteCt>span')[this.id - 1];
     const inputValue = document.querySelectorAll('input')[this.id - 1];
     inputValue.addEventListener('change', () => {
       spanCt.innerText += inputValue.value;
       const data = JSON.stringify({
         note: spanCt.innerText,
-        id: this.id,
+        id: note.id,
       });
+      waterFall();
       // console.log('data:', data, '\n');
       fetch('/api/notes/edit', {
         method: 'Post',

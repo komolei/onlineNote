@@ -24,8 +24,44 @@
 <div class="waterfall ct">
 
 </div>
+<div class="bot">
+    <input type="text" id="komolei" placeholder="chat with robot" value="robot">
+    <button>chat</button>
+</div>
 <script src="/js/app.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script>
+  // let socket = io('http://localhost');
+  let socket = io();
+  socket.on('chat', function (msg) {
+    new Toast(`rebot:${msg}`);
+    showMsg(msg);
+  })
+  document.querySelector('button').addEventListener('click', function () {
+    socket.emit('chat',document.querySelector('#komolei').value);
+  })
+  function showMsg(msg) {
+    if (!("Notification" in window)) {
+      console.log("This browser does not support desktop notification");
+    }
+    else if (Notification.permission === "granted") {
+      var notification = new Notification(msg);
+    }
+    else if (Notification.permission !== 'denied' || Notification.permission === "default") {
+      Notification.requestPermission(function (permission) {
+        if (permission === "granted") {
+          var notification = new Notification(msg);
+        }
+      });
+    }
+//    let p = document.createElement('p');
+//    p.innerText = msg;
+//    document.body.appendChild(p);
+    console.log("msg:", msg);
+  }
+  socket.on('connect', function () { });
+  socket.on('event', function (data) { });
+  socket.on('disconnect', function () { });
 
 </script>
 </body>

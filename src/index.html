@@ -12,30 +12,46 @@
         </div>
     </header>
     <div class="waterfall ct">
-        <!--<div class="note" id="0">-->
-            <!--<label for="inputValue">-->
-                <!--<header class="noteHeader">-->
-                    <!--<span class="noteDel" id="0">X</span>-->
-                <!--</header>-->
-                <!--<div class="noteCt">-->
-                <!--<span>-->
-                   <!--mmmdfadafadfafdavavnhaiohfjfadfafda-->
-                 <!--</span>-->
-                <!--</div>-->
-            <!--</label>-->
-            <!--<footer>-->
-                <!--<input type="text" id="inputValue" placeholder="input text">-->
-            <!--</footer>-->
-        <!--</div>-->
     </div>
-
+    <div class="bot">
+        <input type="text" id="komolei">
+        <button>send</button>
+    </div>
 </body>
 <script src="../public/js/app.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script>
-//    document.querySelector('#root').addEventListener('click',()=>{
-//      Event.fire('change','cookie');
-//      new Toast('xiaogou',500);
-//    })
+  // let socket = io('http://localhost');
+  let socket = io();
+  socket.on('chat', function (msg) {
+    showMsg(msg);
+  })
+  document.querySelector('button').addEventListener('click', function () {
+    socket.emit('chat',document.querySelector('input').value);
+  })
+  function showMsg(msg) {
+    if (!("Notification" in window)) {
+      console.log("This browser does not support desktop notification");
+    }
+    else if (Notification.permission === "granted") {
+      var notification = new Notification(msg);
+    }
+    else if (Notification.permission !== 'denied' || Notification.permission === "default") {
+      Notification.requestPermission(function (permission) {
+        if (permission === "granted") {
+          var notification = new Notification(msg);
+        }
+      });
+    }
+    let p = document.createElement('p');
+    p.innerText = msg;
+    document.body.appendChild(p);
+    console.log("msg:", msg);
+  }
+  socket.on('connect', function () { });
+  socket.on('event', function (data) { });
+  socket.on('disconnect', function () { });
 
 </script>
+
 </html>
